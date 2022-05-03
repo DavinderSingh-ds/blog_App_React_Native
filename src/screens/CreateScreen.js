@@ -10,7 +10,6 @@ const CreateScreen = ({ navigation,route}) => {
 
     return (
         <View>
-
             <Text style={styles.label}>Enter Title: </Text>
             <TextInput style={styles.input} value = {title} onChangeText = {(text) => setTitle(text)}/>
 
