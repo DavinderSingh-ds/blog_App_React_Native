@@ -29,15 +29,20 @@ const blogReducer = function (state, action) {
     }
 };
 
+//now return is a new function if any goes wrong with api then we dont't dispatch we just callback()
+
 const addBlogPost = function(dispatch) {
-    //now return is a new function if any goes wrong with api then we dont't dispatch we just callback()
     return ( title, content, callback ) => {
-            dispatch({ type: 'add_blogpost', payload: {title:title, content: content} });
-            callback();       
+        dispatch({ type: 'add_blogpost', payload: {title:title, content: content} });
+        
+        if (callback) {
+            callback();
+        }    
     };
 };    
 
 //if payload === idofPost to delete, type == what to delete
+
 const deleteBlogPost = (dispatch) => {
     return (id) =>{
         dispatch({ type: 'delete_blogpost', payload: id });
@@ -45,12 +50,16 @@ const deleteBlogPost = (dispatch) => {
 }
 
 const editBlogPost = (dispatch) => {
-    // inner function is return
-    return (id, title, content) => {
+    // inner function is return   callback has navigation 
+    return (id, title, content, callback) => {
         dispatch({ 
             type: 'edit_blogpost', 
             payload: { id: id, title: title, content: content}
         });
+
+        if (callback) {
+            callback();   
+        }
     };
 };
 
