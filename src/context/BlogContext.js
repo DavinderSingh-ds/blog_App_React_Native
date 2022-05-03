@@ -19,10 +19,10 @@ const blogReducer = function (state, action) {
         case 'delete_blogpost':
             return state.filter((blogPost) => blogPost.id !== action.payload );
 
-            case 'delete_blogpost':
-                return state.map((blogPost) => {
-                    return blogPost.id === action.payload.id ? action.payload : blogPost;
-                });  
+        case 'edit_blogpost':
+            return state.map((blogPost) => {
+                return blogPost.id === action.payload.id ? action.payload : blogPost;
+            });  
 
         default:
             return state;
@@ -44,7 +44,7 @@ const deleteBlogPost = (dispatch) => {
     };
 }
 
-const editBlogPost = () => {
+const editBlogPost = (dispatch) => {
     // inner function is return
     return (id, title, content) => {
         dispatch({ 
