@@ -6,9 +6,12 @@ const blogReducer = function (state, action) {
         case 'add_blogpost':
             return [
                 ...state,
-                { 
-                    title: `BlogPost #${state.length + 1}` 
+                { //id for deleting posts
+                    id: Math.floor(Math.random() * 99999),
+                    title: `BlogPost #${state.length + 1}` ,
+                     // ds: `Hi`,
                 },
+
             ];       
         default:
             return state;

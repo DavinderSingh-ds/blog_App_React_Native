@@ -1,5 +1,5 @@
 import React,{useContext} from 'react';
-import {Text,View,StyleSheet,FlatList,Button} from 'react-native';
+import {Text,View,StyleSheet,FlatList,Button,TouchableOpacity} from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
 
@@ -22,13 +22,16 @@ const IndexScreen = () => {
                 data = {state}
                 //it communicate with array of its key like title is key of blogPosts in BlogContext.js
                 keyExtractor = {(blogPost) => blogPost.title}
-                renderItem = {({item}) => {
+                renderItem = {({ item }) => {
                     return (
                         <View style= {styles.row}>
                             <Text style={styles.title}>
-                              {item.title}
+                              {item.title} ,id is :  {item.id}
                             </Text>
-                            <Feather style={styles.icon} name="trash" />
+                            <TouchableOpacity onPress={() => console.log(item.id)}>
+                                <Feather style={styles.icon} name="trash" />
+                            </TouchableOpacity>
+                           
                         </View>
                     );
                 }}
