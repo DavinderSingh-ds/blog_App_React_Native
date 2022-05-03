@@ -9,8 +9,8 @@ const blogReducer = function (state, action) {
                 ...state,
                 { //id for deleting posts
                     id: Math.floor(Math.random() * 99999),
-                    title: `BlogPost #${state.length + 1}` ,
-                     // ds: `Hi`,
+                    title: action.payload.title,
+                    content: action.payload.content,
                 },
 
             ];
@@ -25,8 +25,8 @@ const blogReducer = function (state, action) {
 
 const addBlogPost = function(dispatch) {
     //now return is a new function
-    return () => {
-        dispatch({ type: 'add_blogpost' });
+    return ( title, content ) => {
+        dispatch({ type: 'add_blogpost', payload: {title: title, content: content} });
         //dispatch is modifier state
     };  
 };

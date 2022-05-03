@@ -18,10 +18,10 @@ const IndexScreen = ({ navigation,route}) => {
             </TouchableOpacity>
             
             
-            <Button 
+            {/* <Button 
                 title="Add Post"
                 onPress={addBlogPost}
-            />
+            /> */}
             <FlatList 
                 data = {state}
                 //it communicate with array of its key like title is key of blogPosts in BlogContext.js
@@ -33,7 +33,7 @@ const IndexScreen = ({ navigation,route}) => {
                             
                             <View style= {styles.row}>
                              <Text style={styles.title}>
-                                 {item.title} ,id is :  {item.id}
+                                 {item.title}   {item.content}
                              </Text>
                                 <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
                                   <Feather style={styles.icon} name="trash" />
