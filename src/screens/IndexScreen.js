@@ -6,16 +6,18 @@ import { Feather } from '@expo/vector-icons';
 // import { Context as BlogContext} from '../context/BlogContext';
 // import { Context as ImageContext} from '../context/ImageContext';
 
-const IndexScreen = ({navigation}) => {
-    // console.log(props);
-
-    // const value = useContext(BlogContext);
+const IndexScreen = ({ navigation,route}) => {
     const { state, addBlogPost, deleteBlogPost } = useContext(Context);
 
     return (
         <View>
-            <Text>Index Screen</Text>
-            {/* <Text>{value}</Text> */}
+            <TouchableOpacity onPress={() => {navigation.navigate('CreateSc')}}>
+                <Text style={{margin: 10}}>
+                    <Feather name="plus" size={30} color = 'red' />
+                </Text>
+            </TouchableOpacity>
+            
+            
             <Button 
                 title="Add Post"
                 onPress={addBlogPost}
@@ -45,6 +47,12 @@ const IndexScreen = ({navigation}) => {
         </View>
     );
 };
+
+// IndexScreen.navigationOptions = ({navigation}) => {
+//      return  {
+//        headerRight: <Feather name="plus" size={30} color = 'red' />
+//      };
+//     }
 
 const styles = StyleSheet.create({
     row: {
