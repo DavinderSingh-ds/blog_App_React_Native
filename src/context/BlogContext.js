@@ -1,6 +1,6 @@
 import createDataContext from './createDataContext';
 
-//here state is blogPosts
+//here state is blogPosts  //state is current list of blogPost
 const blogReducer = function (state, action) {
     switch (action.type) {
 
@@ -34,14 +34,24 @@ const addBlogPost = function(dispatch) {
 //if payload === idofPost to delete, type == what to delete
 const deleteBlogPost = (dispatch) => {
     return (id) =>{
-        dispatch({ type: 'delete_blogpost', payload: id })
+        dispatch({ type: 'delete_blogpost', payload: id });
     };
 }
+
+const editBlogPost = () => {
+    // inner function is return
+    return (id, title, content) => {
+        dispatch({ 
+            type: 'edit_blogpost', 
+            payload: { id: id, title: title, content: content}
+        });
+    };
+};
 
 //destructured out  Context and Provider that comes from createDataContext.js
 export const { Context, Provider} = createDataContext(  
     blogReducer, 
-    { addBlogPost, deleteBlogPost },
+    { addBlogPost, deleteBlogPost , editBlogPost },
     // []  this is the initial state
     [{ title: 'TITLE POST', content : 'TEST CONTENT', id : 1}]
 );
