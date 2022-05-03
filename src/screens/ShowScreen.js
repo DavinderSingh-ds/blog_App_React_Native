@@ -10,11 +10,16 @@ const ShowScreen = ({ navigation,route}) => {
     const { state } = useContext(Context);
     const id_ofPost = route.params.id;
 
-    const blogPost = state.find((blogPost) => blogPost.id == id_ofPost );
+    const blogPost = state.find(
+        (blogPost) => blogPost.id == id_ofPost 
+        );
 
     return (
         <View>
-            <TouchableOpacity onPress={() => {navigation.navigate('EditSc')}}>
+            <TouchableOpacity onPress={() => 
+                {navigation.navigate('EditSc', {id: id_ofPost})}
+                }
+            >
                 <Text style={{margin: 10}}>
                     <EvilIcons name="pencil" size={35} color = 'blue' />
                 </Text>
