@@ -3,10 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import IndexScreen from './src/screens/IndexScreen';
+import { BlogProvider } from './src/context/BlogContext';
 
 const Stack = createNativeStackNavigator();
 
-const navigator = () => {
+const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="IndexSc">
@@ -23,4 +24,10 @@ const navigator = () => {
   );
 };
 
-export default navigator;
+export default () => {
+  return (
+    <BlogProvider>
+      <Navigator />
+    </BlogProvider>
+  );   
+};
