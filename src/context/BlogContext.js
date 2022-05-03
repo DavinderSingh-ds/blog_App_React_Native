@@ -24,15 +24,15 @@ const blogReducer = function (state, action) {
 };
 
 const addBlogPost = function(dispatch) {
-    //now return is a new function
-    return ( title, content ) => {
-        dispatch({ type: 'add_blogpost', payload: {title: title, content: content} });
-        //dispatch is modifier state
-    };  
-};
+    //now return is a new function if any goes wrong with api then we dont't dispatch we just callback()
+    return ( title, content, callback ) => {
+            dispatch({ type: 'add_blogpost', payload: {title:title, content: content} });
+            callback();       
+    };
+};    
 
+//if payload === idofPost to delete, type == what to delete
 const deleteBlogPost = (dispatch) => {
-    //payload === idofPost to delete, type == what to delete
     return (id) =>{
         dispatch({ type: 'delete_blogpost', payload: id })
     };
@@ -44,3 +44,18 @@ export const { Context, Provider} = createDataContext(
     { addBlogPost, deleteBlogPost },
     []
 );
+
+
+
+
+// in case of dealing with Api's    
+// const addBlogPost = function(dispatch) {
+//     //now return is a new function if any goes wrong with api then we dont't dispatch we just callback()
+//     return async ( title, content, callback ) => {
+//         try {
+//             await axios.post('alskdjf',title, content)
+//             dispatch({ type: 'add_blogpost', payload: {title, content} });
+//             callback();
+//         } catch (e) {            
+//         }       
+//     };  
