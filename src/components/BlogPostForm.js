@@ -22,6 +22,14 @@ const BlogPostForm = ({ onSubmit, initialValues }) => {
     );
 };
 
+// it is made bcz from createScreen there are initialValues Not Coming  .i.e. automatically checked
+BlogPostForm.defaultProps = {
+    initialValues: {
+        title: '',
+        content: '',
+    }
+};
+
 const styles = StyleSheet.create({
     input: {
         fontSize: 18,
