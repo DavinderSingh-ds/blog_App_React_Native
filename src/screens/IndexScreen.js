@@ -1,10 +1,13 @@
 import React,{useContext} from 'react';
 import {Text,View,StyleSheet,FlatList,Button} from 'react-native';
-import BlogContext from '../context/BlogContext';
+import { Context } from '../context/BlogContext';
+
+// import { Context as BlogContext} from '../context/BlogContext';
+// import { Context as ImageContext} from '../context/ImageContext';
 
 const IndexScreen = () => {
     // const value = useContext(BlogContext);
-    const { data, addBlogPost } = useContext(BlogContext);
+    const { state, addBlogPost } = useContext(Context);
 
     return (
         <View>
@@ -15,7 +18,7 @@ const IndexScreen = () => {
                 onPress={addBlogPost}
             />
             <FlatList 
-                data = {data}
+                data = {state}
                 //it communicate with array of its key like title is key of blogPosts in BlogContext.js
                 keyExtractor = {(blogPost) => blogPost.title}
                 renderItem = {({item}) => {
