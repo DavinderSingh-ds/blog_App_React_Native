@@ -8,12 +8,13 @@ import { Provider } from './src/context/BlogContext';
 import IndexScreen from './src/screens/IndexScreen';
 import ShowScreen from './src/screens/ShowScreen';
 import CreateScreen from './src/screens/CreateScreen';
+import EditScreen from './src/screens/EditScreen';
 
 
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
-  return (
+  return ( 
     <NavigationContainer>
       <Stack.Navigator initialRouteName="IndexSc">
 
@@ -33,6 +34,11 @@ const Navigator = () => {
             name="CreateSc"
             component={CreateScreen} 
             options={{ title: 'Create Screen' }}
+            />    
+        <Stack.Screen 
+            name="EditSc"
+            component={EditScreen} 
+            options={{ title: 'Edit Screen' }}
             />      
       </Stack.Navigator>
       
