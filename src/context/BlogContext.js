@@ -1,6 +1,7 @@
 import createDataContext from './createDataContext';
 
 //here state is blogPosts  //state is current list of blogPost
+// actionFunction are add, delete and edit
 const blogReducer = function (state, action) {
     switch (action.type) {
 
@@ -17,6 +18,11 @@ const blogReducer = function (state, action) {
 
         case 'delete_blogpost':
             return state.filter((blogPost) => blogPost.id !== action.payload );
+
+            case 'delete_blogpost':
+                return state.map((blogPost) => {
+                    return blogPost.id === action.payload.id ? action.payload : blogPost;
+                });  
 
         default:
             return state;
