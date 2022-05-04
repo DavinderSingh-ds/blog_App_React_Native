@@ -10,10 +10,18 @@ const IndexScreen = ({ navigation,route}) => {
     const { state, addBlogPost, deleteBlogPost, getBlogPosts } = useContext(Context);
 
     // // linked with api
-    // getBlogposts();   useEffect is a hook work with api things 
-
+    // getBlogposts();   useEffect is a hook work with api things     // whwn we use navigationlistener in useeffect it automatic update json api localhost data
+console.log(navigation);
     useEffect(() => {
         getBlogPosts();
+
+        const listener = navigation.addListener('didFocus', () => {
+            getBlogPosts();
+        });
+
+        return () => {
+            listener.remove();
+        };
     }, []);
 
     return (
