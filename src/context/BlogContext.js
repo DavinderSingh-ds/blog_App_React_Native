@@ -1,4 +1,5 @@
 import createDataContext from './createDataContext';
+import jsonServer from '../api/jsonServer';
 
 //here state is blogPosts  //state is current list of blogPost
 // actionFunction are add, delete and edit
@@ -23,17 +24,30 @@ const blogReducer = function (state, action) {
             return state.map((blogPost) => {
                 return blogPost.id === action.payload.id ? action.payload : blogPost;
             });  
-
+        
+        case 'get_blogposts':
+            return action.payload;    
+        
         default:
             return state;
     }
 };
 
+const getBlogPosts = dispatch => {
+    return async () => {
+       const response =  await jsonServer.get('/blogposts');
+
+       dispatch({ type: 'get_blogposts', payload: response.data });
+    };
+};
+
 //now return is a new function if any goes wrong with api then we dont't dispatch we just callback()
 
 const addBlogPost = function(dispatch) {
-    return ( title, content, callback ) => {
-        dispatch({ type: 'add_blogpost', payload: {title:title, content: content} });
+    return async ( title, content, callback ) => {
+        await jsonServer.post('/blogposts', { title: title, content: content });
+
+        // dispatch({ type: 'add_blogpost', payload: {title:title, content: content} });
         
         if (callback) {
             callback();
@@ -66,9 +80,10 @@ const editBlogPost = (dispatch) => {
 //destructured out  Context and Provider that comes from createDataContext.js
 export const { Context, Provider} = createDataContext(  
     blogReducer, 
-    { addBlogPost, deleteBlogPost , editBlogPost },
-    // []  this is the initial state
-    [{ title: 'TITLE POST', content : 'TEST CONTENT', id : 1}]
+    { addBlogPost, deleteBlogPost , editBlogPost, getBlogPosts },
+    []  
+     //this is the initial state
+    // [{ title: 'TITLE POST', content : 'TEST CONTENT', id : 1}]
 );
 
 

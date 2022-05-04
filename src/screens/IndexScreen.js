@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useEffect} from 'react';
 import {Text,View,StyleSheet,FlatList,Button,TouchableOpacity} from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
@@ -7,7 +7,14 @@ import { Feather } from '@expo/vector-icons';
 // import { Context as ImageContext} from '../context/ImageContext';
 
 const IndexScreen = ({ navigation,route}) => {
-    const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+    const { state, addBlogPost, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+    // // linked with api
+    // getBlogposts();   useEffect is a hook work with api things 
+
+    useEffect(() => {
+        getBlogPosts();
+    }, []);
 
     return (
         <View>
