@@ -1,5 +1,6 @@
 import createDataContext from './createDataContext';
-import jsonServer from '../api/jsonServer';
+import jsonServer from '../api/jsonServer';   
+// post , delete , put 
 
 //here state is blogPosts  //state is current list of blogPost
 // actionFunction are add, delete and edit
@@ -66,7 +67,9 @@ const deleteBlogPost = (dispatch) => {
 }
 const editBlogPost = (dispatch) => {
     // inner function is return   callback has navigation 
-    return (id, title, content, callback) => {
+    return async (id, title, content, callback) => {
+        await jsonServer.put(`/blogposts/${id}`,{ title,content });
+
         dispatch({ 
             type: 'edit_blogpost', 
             payload: { id: id, title: title, content: content}

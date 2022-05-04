@@ -6,23 +6,23 @@ import { Feather } from '@expo/vector-icons';
 // import { Context as BlogContext} from '../context/BlogContext';
 // import { Context as ImageContext} from '../context/ImageContext';
 
-const IndexScreen = ({ navigation,route}) => {
+const IndexScreen = ({ navigation }) => {
     const { state, addBlogPost, deleteBlogPost, getBlogPosts } = useContext(Context);
+    
 
     // // linked with api
     // getBlogposts();   useEffect is a hook work with api things     // whwn we use navigationlistener in useeffect it automatic update json api localhost data
 
     useEffect(() => {
         getBlogPosts();
-
+        
         const listener = navigation.addListener('didFocus', () => {
             getBlogPosts();
-        });
-
+           });
         return () => {
             listener.remove();
-        };
-    }, []);
+           };
+         }, []);
 
     return (
         <View>
