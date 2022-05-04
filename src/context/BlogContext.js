@@ -6,16 +6,16 @@ import jsonServer from '../api/jsonServer';
 const blogReducer = function (state, action) {
     switch (action.type) {
 
-        case 'add_blogpost':
-            return [
-                ...state,
-                { //id for deleting posts
-                    id: Math.floor(Math.random() * 99999),
-                    title: action.payload.title,
-                    content: action.payload.content,
-                },
+        // case 'add_blogpost':
+        //     return [
+        //         ...state,
+        //         { //id for deleting posts
+        //             id: Math.floor(Math.random() * 99999),
+        //             title: action.payload.title,
+        //             content: action.payload.content,
+        //         },
 
-            ];
+        //     ];
 
         case 'delete_blogpost':
             return state.filter((blogPost) => blogPost.id !== action.payload );
@@ -58,11 +58,12 @@ const addBlogPost = function(dispatch) {
 //if payload === idofPost to delete, type == what to delete
 
 const deleteBlogPost = (dispatch) => {
-    return (id) =>{
+    return async (id) =>{
+        await jsonServer.delete(`/blogposts/${id}`);
+        
         dispatch({ type: 'delete_blogpost', payload: id });
     };
 }
-
 const editBlogPost = (dispatch) => {
     // inner function is return   callback has navigation 
     return (id, title, content, callback) => {

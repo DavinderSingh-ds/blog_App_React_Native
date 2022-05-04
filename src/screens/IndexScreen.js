@@ -11,7 +11,7 @@ const IndexScreen = ({ navigation,route}) => {
 
     // // linked with api
     // getBlogposts();   useEffect is a hook work with api things     // whwn we use navigationlistener in useeffect it automatic update json api localhost data
-console.log(navigation);
+
     useEffect(() => {
         getBlogPosts();
 
